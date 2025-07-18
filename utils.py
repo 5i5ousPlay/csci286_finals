@@ -188,3 +188,10 @@ def animate_consensus_evolution(consensus_over_time, interval=500):
     ani = animation.FuncAnimation(fig, update, frames=num_steps, interval=interval, repeat=False)
     plt.close(fig)
     return HTML(ani.to_jshtml())
+
+
+def generate_malicious_mask(num_nodes, fraction=0.2):
+    malicious_mask = torch.zeros(num_nodes, dtype=torch.bool)
+    indices = torch.randperm(num_nodes)[:int(num_nodes * fraction)]
+    malicious_mask[indices] = True
+    return malicious_mask
